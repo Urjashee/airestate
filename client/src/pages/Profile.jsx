@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import {
     updateUserStart,
     updateUserSuccess,
-    updateUserFailure,
+    updateUserFailure, deleteUserStart, deleteUserFailure, deleteUserSuccess, signOutUserStart,
 } from '../redux/user/userSlice';
 
 function Profile(props) {
@@ -87,6 +87,38 @@ function Profile(props) {
       }
     }
 
+    const handleDeleteUser = async (e) => {
+      try {
+          dispatch(deleteUserStart())
+          const res = await fetch(`/api/user/delete`, {
+              method: 'DELETE',
+          });
+          const data = await res.json();
+          if (data.success === false) {
+              dispatch(deleteUserFailure(data.message));
+              return;
+          }
+          dispatch(deleteUserSuccess(data));
+      } catch (e) {
+          dispatch(deleteUserFailure(error.message))
+      }
+    }
+
+    const handleSignOut = async () => {
+        try {
+            dispatch(signOutUserStart());
+            const res = await fetch('/api/auth/signout');
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(deleteUserFailure(data.message));
+                return;
+            }
+            dispatch(deleteUserSuccess(data));
+        } catch (error) {
+            dispatch(deleteUserFailure(error.message));
+        }
+    };
+
     return (
         <div className='p-3 max-w-lg mx-auto'>
             <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -149,7 +181,7 @@ function Profile(props) {
             </form>
             <div className='flex justify-between mt-5'>
                 <span
-                    // onClick={handleDeleteUser}
+                    onClick={handleDeleteUser}
                     className='text-red-700 cursor-pointer'
                 >
                     Delete account

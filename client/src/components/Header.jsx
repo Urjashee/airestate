@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Logo from '../assets/OIG.3DoXsO63VasZUxrc1O2M.png'
 import {FaSearch} from "react-icons/fa";
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import {useSelector} from "react-redux";
 
 function Header(props) {
+    const {currentUser} = useSelector((state) => state.user);
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
     return (
         <header className='bg-slate-200 shadow-md'>
             <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
@@ -36,9 +40,17 @@ function Header(props) {
                         </li>
                     </Link>
                     <Link to='/profile'>
-                        <li className='text-slate-700 hover:underline'>
-                            Sign in
-                        </li>
+                        {currentUser ? (
+                            <img
+                                className='rounded-full h-7 w-7 object-cover'
+                                src={currentUser.avatar}
+                                alt='profile'
+                            />
+                        ) : (
+                            <li className='text-slate-700 hover:underline'>
+                                Sign in
+                            </li>
+                        )}
                     </Link>
                 </ul>
             </div>

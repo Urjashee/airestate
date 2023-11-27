@@ -30,7 +30,7 @@ export const signin = async (req, res, next) => {
         if (!validPassword)
             return next(errorHandler(401, 'Wrong credentials!'));
         const token = generateToken(validUser)
-        const { password: pass, ...userInfo } = validUser._doc;
+        const {password: pass, ...userInfo} = validUser._doc;
         // console.log("Token - " + token)
         res
             .cookie('access_token', token, {httpOnly: true})
@@ -44,11 +44,11 @@ export const signin = async (req, res, next) => {
 export const google = async (req, res, next) => {
     try {
         const user = await User.findOne({email: req.body.email})
-        if (user){
+        if (user) {
             const token = generateToken(user)
-            const {password: pass, ...rest} =user._doc;
+            const {password: pass, ...rest} = user._doc;
             res
-                .cookie('access_token', token, { httpOnly: true })
+                .cookie('access_token', token, {httpOnly: true})
                 .status(200)
                 .json(rest);
         } else {
@@ -65,13 +65,22 @@ export const google = async (req, res, next) => {
             })
             await newUser.save();
             const token = generateToken(newUser)
-            const { password: pass, ...rest } = newUser._doc;
+            const {password: pass, ...rest} = newUser._doc;
             res
-                .cookie('access_token', token, { httpOnly: true })
+                .cookie('access_token', token, {httpOnly: true})
                 .status(200)
                 .json(rest);
         }
     } catch (error) {
         next(error)
+    }
+}
+
+export const signOut = (req, res, next) => {
+    try {
+        res.clearCookie('access_token')
+        res.status(200).json('User has been logged out')
+    } catch (e) {
+        next(e)
     }
 }

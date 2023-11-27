@@ -187,8 +187,8 @@ function Profile(props) {
                     Delete account
                 </span>
                 <span
-                    // onClick={handleSignOut}
-                      className='text-red-700 cursor-pointer'>
+                    onClick={handleSignOut}
+                    className='text-red-700 cursor-pointer'>
                     Sign out
                 </span>
             </div>

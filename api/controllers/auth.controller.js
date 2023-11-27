@@ -31,7 +31,7 @@ export const signin = async (req, res, next) => {
             return next(errorHandler(401, 'Wrong credentials!'));
         const token = generateToken(validUser)
         const { password: pass, ...userInfo } = validUser._doc;
-        console.log("Token - " + token)
+        // console.log("Token - " + token)
         res
             .cookie('access_token', token, {httpOnly: true})
             .status(200)

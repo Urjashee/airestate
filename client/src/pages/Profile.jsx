@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useRef, useState, useEffect} from 'react';
 import {
     getDownloadURL,
@@ -8,8 +8,12 @@ import {
     uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+    updateUserStart,
+    updateUserSuccess,
+    updateUserFailure,
+} from '../redux/user/userSlice';
 
 function Profile(props) {
     const fileRef = useRef(null);
@@ -54,10 +58,39 @@ function Profile(props) {
         );
     };
 
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.id]: e.target.value });
+    }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+          dispatch(updateUserStart());
+          const res = await fetch(`/api/user/update`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+          });
+          const data = await res.json();
+          if (data.success === false) {
+              dispatch(updateUserFailure(data.message));
+              return;
+          }
+
+          dispatch(updateUserSuccess(data));
+          setUpdateSuccess(true)
+          setUpdateSuccess(true);
+      } catch (e) {
+          dispatch(updateUserFailure(e.message))
+      }
+    }
+
     return (
         <div className='p-3 max-w-lg mx-auto'>
             <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
-            <form className='flex flex-col gap-4'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                 <input
                     onChange={(e) => setFile(e.target.files[0])}
                     type='file'
@@ -90,7 +123,7 @@ function Profile(props) {
                     defaultValue={currentUser.username}
                     id='username'
                     className='border p-3 rounded-lg'
-                    // onChange={handleChange}
+                    onChange={handleChange}
                 />
                 <input
                     type='email'
@@ -98,12 +131,12 @@ function Profile(props) {
                     id='email'
                     defaultValue={currentUser.email}
                     className='border p-3 rounded-lg'
-                    // onChange={handleChange}
+                    onChange={handleChange}
                 />
                 <input
                     type='password'
                     placeholder='password'
-                    // onChange={handleChange}
+                    onChange={handleChange}
                     id='password'
                     className='border p-3 rounded-lg'
                 />
@@ -127,7 +160,8 @@ function Profile(props) {
                     Sign out
                 </span>
             </div>
-
+            <p className='text-red-700 mt-5'>{error ? error: ''}</p>
+            <p className='text-green-700 mt-5'>{updateSuccess ? 'User is updated successfully' : ''}</p>
         </div>
     );
 }

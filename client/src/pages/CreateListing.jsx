@@ -92,7 +92,7 @@ function CreateListing(props) {
     };
 
     const handleChange = (e) => {
-        if (e.target.id === 'sale' || e.target.id === 'rent') {
+        if (e.target.id === 'homestay' || e.target.id === 'rent') {
             setFormData({
                 ...formData,
                 type: e.target.id,
@@ -193,10 +193,10 @@ function CreateListing(props) {
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
-                                id='sale'
+                                id='homestay'
                                 className='w-5'
                                 onChange={handleChange}
-                                checked={formData.type === 'sale'}
+                                checked={formData.type === 'homestay'}
                             />
                             <span>Homestay</span>
                         </div>

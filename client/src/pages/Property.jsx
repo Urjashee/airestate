@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 
 function Property(props) {
     return (
-        <div>Property</div>
+        <div className='p-3 max-w-lg mx-auto'>
+            <h1 className='text-3xl font-semibold text-center my-7'>Property</h1>
+        </div>
     );
 }
 

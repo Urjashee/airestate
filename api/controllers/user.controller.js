@@ -1,6 +1,7 @@
 import {verifyToken, userData} from "../utils/tokenHandler.js";
 import bcryptjs from "bcryptjs";
 import User from "../models/user.model.js";
+import Property from "../models/property.model.js";
 
 export const test = (req, res) => {
     res.json({

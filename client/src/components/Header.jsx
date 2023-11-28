@@ -39,6 +39,13 @@ function Header(props) {
                             About
                         </li>
                     </Link>
+                    {currentUser &&
+                        <Link to='/view-listing'>
+                            <li className='hidden sm:inline text-slate-700 hover:underline'>
+                                Properties
+                            </li>
+                        </Link>
+                    }
                     <Link to='/profile'>
                         {currentUser ? (
                             <img

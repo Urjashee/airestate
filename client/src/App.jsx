@@ -9,6 +9,7 @@ import Header from "./components/Header.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import CreateListing from "./pages/CreateListing.jsx";
 import Property from "./pages/Property.jsx";
+import PropertyList from "./pages/PropertyList.jsx";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route element={<PrivateRoute/>}>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/create-property-listing" element={<CreateListing/>}/>
+                    <Route path="/view-listing" element={<PropertyList/>}/>
 
                 </Route>
             </Routes>

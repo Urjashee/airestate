@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 import {userRouter} from "./routes/user.route.js";
 import {authRouter} from "./routes/auth.route.js";
+import {estateRouter} from "./routes/property.route.js";
 
 dotenv.config();
 
@@ -18,8 +19,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser())
 app.use(express.urlencoded({extended: true}));
+
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/property', estateRouter);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000')

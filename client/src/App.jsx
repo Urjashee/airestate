@@ -8,6 +8,7 @@ import Profile from "./pages/Profile.jsx";
 import Header from "./components/Header.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import CreateListing from "./pages/CreateListing.jsx";
+import Property from "./pages/Property.jsx";
 
 function App() {
     return (
@@ -18,9 +19,12 @@ function App() {
                 <Route path="/sign-up" element={<SignUp/>}/>
                 <Route path="/sign-in" element={<SignIn/>}/>
                 <Route path="/about" element={<About/>}/>
+                <Route path="/property/:id" element={<Property/>}/>
+
                 <Route element={<PrivateRoute/>}>
                     <Route path="/profile" element={<Profile/>}/>
-                    <Route path="/create-listing" element={<CreateListing/>}/>
+                    <Route path="/create-property-listing" element={<CreateListing/>}/>
+
                 </Route>
             </Routes>
         </BrowserRouter>

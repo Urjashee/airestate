@@ -77,7 +77,7 @@ function PropertyList(props) {
                         >
                             Delete
                         </button>
-                        <Link to={`/update-listing/${listing._id}`}>
+                        <Link to={`/update-property/${listing._id}`}>
                             <button className='text-green-700 uppercase'>Edit</button>
                         </Link>
                     </div>

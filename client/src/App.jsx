@@ -10,6 +10,8 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import CreateListing from "./pages/CreateListing.jsx";
 import Property from "./pages/Property.jsx";
 import PropertyList from "./pages/PropertyList.jsx";
+import UpdateListing from "./pages/UpdateListing.jsx";
+import Contact from "./components/Contact.jsx";
 
 function App() {
     return (
@@ -20,12 +22,14 @@ function App() {
                 <Route path="/sign-up" element={<SignUp/>}/>
                 <Route path="/sign-in" element={<SignIn/>}/>
                 <Route path="/about" element={<About/>}/>
+                <Route path="/contact" element={<Contact/>}/>
                 <Route path="/property/:id" element={<Property/>}/>
 
                 <Route element={<PrivateRoute/>}>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/create-property-listing" element={<CreateListing/>}/>
-                    <Route path="/view-listing" element={<PropertyList/>}/>
+                    <Route path="/view-property" element={<PropertyList/>}/>
+                    <Route path="/update-property/:id" element={<UpdateListing/>}/>
 
                 </Route>
             </Routes>

@@ -40,9 +40,9 @@ function Header(props) {
                         </li>
                     </Link>
                     {currentUser &&
-                        <Link to='/view-listing'>
+                        <Link to='/view-property'>
                             <li className='hidden sm:inline text-slate-700 hover:underline'>
-                                Properties
+                                My Properties
                             </li>
                         </Link>
                     }

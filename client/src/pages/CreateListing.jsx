@@ -269,6 +269,7 @@ function CreateListing(props) {
                             <p>Baths</p>
                         </div>
                         <div className='flex items-center gap-2'>
+                            {formData.type === 'rent' ? (
                             <input
                                 type='number'
                                 id='regularPrice'
@@ -278,7 +279,19 @@ function CreateListing(props) {
                                 className='p-3 border border-gray-300 rounded-lg'
                                 onChange={handleChange}
                                 value={formData.regularPrice}
-                            />
+                            />) :
+                                (
+                                    <input
+                                        type='number'
+                                        id='regularPrice'
+                                        min='10'
+                                        max='10000000'
+                                        required
+                                        className='p-3 border border-gray-300 rounded-lg'
+                                        onChange={handleChange}
+                                        value={formData.regularPrice}
+                                    />)
+                            }
                             <div className='flex flex-col items-center'>
                                 <p>Regular price</p>
                                 {formData.type === 'rent' ? (

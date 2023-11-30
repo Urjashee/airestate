@@ -12,6 +12,7 @@ import Property from "./pages/Property.jsx";
 import PropertyList from "./pages/PropertyList.jsx";
 import UpdateListing from "./pages/UpdateListing.jsx";
 import Contact from "./components/Contact.jsx";
+import Search from "./pages/Search.jsx";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/property/:id" element={<Property/>}/>
+                <Route path="/search" element={<Search/>}/>
 
                 <Route element={<PrivateRoute/>}>
                     <Route path="/profile" element={<Profile/>}/>
